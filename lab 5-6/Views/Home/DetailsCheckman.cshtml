@@ -1,0 +1,49 @@
+﻿@model IEnumerable<lab_5_6.Models.Checkman>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Список учетчиков </h2>
+
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telephone)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.adress)
+        </th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink((item.Name), "EditCheckman", new { Name = item.Name })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.adress)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<p>
+    @Html.ActionLink("Добавить учетчика", "CreateCheckman")
+</p>
+<p>
+
+    @Html.ActionLink("Назад", "Index")
+</p>
