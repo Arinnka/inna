@@ -1,0 +1,61 @@
+﻿@model IEnumerable<lab_5_6.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Список заказов </h2>
+
+<p>
+    @Html.ActionLink("Принять/Отпустить товар", "DetailsTable")
+</p>
+<table class="table">
+    
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Flower)
+            </th>       
+            <th>
+                @Html.DisplayNameFor(model => model.volume)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.oplata)
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((item.Flower), "Details", new { id = item.Id })
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.volume)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.oplata)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+
+<p>
+    @Html.ActionLink("Создать новый заказ", "Create")
+</p>
+<p>
+    @Html.ActionLink("Посмотреть товары", "DetailsFlower")
+
+</p>
+<p>
+    @Html.ActionLink("Посмотреть склады", "DetailsStock")
+
+</p>
+<p>
+    @Html.ActionLink("Посмотреть учетчиков", "DetailsCheckman")
+
+</p>

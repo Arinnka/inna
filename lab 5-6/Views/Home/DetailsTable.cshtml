@@ -1,0 +1,64 @@
+﻿@model IEnumerable<lab_5_6.Models.Table>
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Табель расходов</h2>
+
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idFlower)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.volume)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idStock)
+        </th>
+      
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.ActionLink((item.idFlower), "DeleteTable", new { id = item.Id })
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.volume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idStock)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Принять товар", "CreateTable")
+</p>
+<p>
+    @Html.ActionLink("Отпустить товар", "CreateTable1")
+</p>
+<p>
+
+    @Html.ActionLink("Назад", "Index")
+</p>

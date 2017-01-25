@@ -1,0 +1,44 @@
+﻿@model lab_5_6.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Html.DisplayFor(model => model.Flower)</h2>
+
+<div>    
+    <hr />
+    <dl class="dl-horizontal">        
+
+        <dd>
+            
+            @Html.DisplayNameFor(model => model.Checkman)
+            
+            @Html.DisplayFor(model => model.Checkman)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.Stok)
+            @Html.DisplayFor(model => model.Stok)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.date)
+            @Html.DisplayFor(model => model.date)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.volume)
+            @Html.DisplayFor(model => model.volume)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.oplata)
+            @Html.DisplayFor(model => model.oplata)
+        </dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Оплатить товар", "Edit1", new { id = Model.Id }) |
+    @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }) |
+    @Html.ActionLink("Назад", "Index")
+</p>
