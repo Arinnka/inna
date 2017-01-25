@@ -31,7 +31,7 @@
           <Property Name="Stok" Type="int" Nullable="false" />
           <Property Name="date" Type="date" />
           <Property Name="volume" Type="nchar" MaxLength="10" />
-          <Property Name="oplata" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
@@ -171,10 +171,10 @@
           <Property Name="Stok" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Precision="0" />
           <Property Name="volume" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="oplata" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Checkman1" Relationship="Self.FK_Order_ToTable_1" FromRole="Order" ToRole="Checkman" />
           <NavigationProperty Name="Flower1" Relationship="Self.FK_Order_ToTable" FromRole="Order" ToRole="Flower" />
           <NavigationProperty Name="Stock" Relationship="Self.FK_Order_ToTable_2" FromRole="Order" ToRole="Stock" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
@@ -312,13 +312,13 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="bazaModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Flower" ColumnName="Flower" />
                 <ScalarProperty Name="Checkman" ColumnName="Checkman" />
                 <ScalarProperty Name="Stok" ColumnName="Stok" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="volume" ColumnName="volume" />
-                <ScalarProperty Name="oplata" ColumnName="oplata" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

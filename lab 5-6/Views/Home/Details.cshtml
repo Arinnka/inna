@@ -30,15 +30,25 @@
             @Html.DisplayFor(model => model.volume)
         </dd>
         <dd>
-            @Html.DisplayNameFor(model => model.oplata)
-            @Html.DisplayFor(model => model.oplata)
+            @Html.DisplayNameFor(model => model.status)
+            @Html.DisplayFor(model => model.status)
         </dd>
     </dl>
 </div>
 
-<p>
-    @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }) |
+<div>
+    <h2>Админстратор</h2>
+    <p>
+        @Html.ActionLink("Редактировать заказ", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Изменить статус заказа", "Edit3", new { id = Model.Id }) |
+        @Html.ActionLink("Удалить заказ", "Delete", new { id = Model.Id }) |
+        <hr />
+</div>
+<div>
+    <h2>Менеджер</h2>
     @Html.ActionLink("Оплатить товар", "Edit1", new { id = Model.Id }) |
-    @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }) |
+    @Html.ActionLink("Проверка заказа", "Edit2", new { id = Model.Id }) |
+
     @Html.ActionLink("Назад", "Index")
-</p>
+    </p>
+</div>

@@ -21,7 +21,7 @@
                 @Html.DisplayNameFor(model => model.volume)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.oplata)
+                @Html.DisplayNameFor(model => model.status)
             </th>
         </tr>
         @foreach (var item in Model)
@@ -35,7 +35,7 @@
                     @Html.DisplayFor(modelItem => item.volume)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.oplata)
+                    @Html.DisplayFor(modelItem => item.status)
                 </td>
 
             </tr>
@@ -43,19 +43,23 @@
 
     </table>
 
+<div>
+    <p>
+        @Html.ActionLink("Создать новый заказ", "Create")
+    </p>
+</div>
+<div>
+    <h2>Информация о базе</h2>
+    <p>
+        @Html.ActionLink("Посмотреть товары", "DetailsFlower")
 
-<p>
-    @Html.ActionLink("Создать новый заказ", "Create")
-</p>
-<p>
-    @Html.ActionLink("Посмотреть товары", "DetailsFlower")
+    </p>
+    <p>
+        @Html.ActionLink("Посмотреть склады", "DetailsStock")
 
-</p>
-<p>
-    @Html.ActionLink("Посмотреть склады", "DetailsStock")
+    </p>
+    <p>
+        @Html.ActionLink("Посмотреть учетчиков", "DetailsCheckman")
 
-</p>
-<p>
-    @Html.ActionLink("Посмотреть учетчиков", "DetailsCheckman")
-
-</p>
+    </p>
+</div>

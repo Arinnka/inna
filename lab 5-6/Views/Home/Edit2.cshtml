@@ -1,0 +1,47 @@
+﻿@model lab_5_6.Models.Order
+
+@{
+    ViewBag.Title = "Оплата товара";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Проверка заказа</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+      
+        <hr />
+              @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+
+        @Html.DropDownListFor(model => model.status, new List<SelectListItem>
+               {
+                        new SelectListItem() {Text = "Проверено", Value="tested"},
+                        new SelectListItem() {Text = "Не проверено. Ошибка.", Value="not tested"},
+
+               }
+               )
+        <h4>Можете оставить комментарий описывающий ошибку</h4>
+        <div class="form-group">
+          
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
