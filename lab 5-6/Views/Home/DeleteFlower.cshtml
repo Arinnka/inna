@@ -1,0 +1,39 @@
+﻿@model lab_5_6.Models.Flower
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Вы действительно хотите удалить этот товар?</h2>
+
+<div>
+    <dl class="dl-horizontal">
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+       
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" />
+        </div>
+    <h4>
+
+
+    </h4>
+        @Html.ActionLink("Назад", "Index")
+    
+    }
+    
+</div>

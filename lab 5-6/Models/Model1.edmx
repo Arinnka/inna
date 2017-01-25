@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище bazaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Checkman">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="adress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Flower">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="int" />
+          <Property Name="rekvezits" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Flower" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Checkman" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Stok" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="volume" Type="nchar" MaxLength="10" />
+          <Property Name="oplata" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" />
+          <Property Name="volume" Type="int" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idFlower" Type="nvarchar" MaxLength="50" />
+          <Property Name="volume" Type="nvarchar" MaxLength="10" />
+          <Property Name="date" Type="date" />
+          <Property Name="idStock" Type="int" />
+        </EntityType>
+        <Association Name="FK_Order_ToTable">
+          <End Role="Flower" Type="Self.Flower" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flower">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Flower" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ToTable_1">
+          <End Role="Checkman" Type="Self.Checkman" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Checkman">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Checkman" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ToTable_2">
+          <End Role="Stock" Type="Self.Stock" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Stok" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToTable">
+          <End Role="Flower" Type="Self.Flower" Multiplicity="0..1" />
+          <End Role="Table" Type="Self.Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flower">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Table">
+              <PropertyRef Name="idFlower" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToTable_1">
+          <End Role="Stock" Type="Self.Stock" Multiplicity="0..1" />
+          <End Role="Table" Type="Self.Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Table">
+              <PropertyRef Name="idStock" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище bazaModelContainer">
+          <EntitySet Name="Checkman" EntityType="Self.Checkman" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flower" EntityType="Self.Flower" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Order_ToTable" Association="Self.FK_Order_ToTable">
+            <End Role="Flower" EntitySet="Flower" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ToTable_1" Association="Self.FK_Order_ToTable_1">
+            <End Role="Checkman" EntitySet="Checkman" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ToTable_2" Association="Self.FK_Order_ToTable_2">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToTable" Association="Self.FK_Table_ToTable">
+            <End Role="Flower" EntitySet="Flower" />
+            <End Role="Table" EntitySet="Table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToTable_1" Association="Self.FK_Table_ToTable_1">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="Table" EntitySet="Table" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bazaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Checkman">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_ToTable_1" FromRole="Checkman" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Flower">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_ToTable" FromRole="Flower" ToRole="Order" />
+          <Property Name="rekvezits" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table" Relationship="bazaModel.FK_Table_ToTable" FromRole="Flower" ToRole="Table" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Flower" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Checkman" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Stok" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="volume" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="oplata" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Checkman1" Relationship="Self.FK_Order_ToTable_1" FromRole="Order" ToRole="Checkman" />
+          <NavigationProperty Name="Flower1" Relationship="Self.FK_Order_ToTable" FromRole="Order" ToRole="Flower" />
+          <NavigationProperty Name="Stock" Relationship="Self.FK_Order_ToTable_2" FromRole="Order" ToRole="Stock" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="volume" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_ToTable_2" FromRole="Stock" ToRole="Order" />
+          <NavigationProperty Name="Table" Relationship="bazaModel.FK_Table_ToTable_1" FromRole="Stock" ToRole="Table" />
+        </EntityType>
+        <Association Name="FK_Order_ToTable_1">
+          <End Role="Checkman" Type="Self.Checkman" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Checkman">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Checkman" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ToTable">
+          <End Role="Flower" Type="Self.Flower" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flower">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Flower" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ToTable_2">
+          <End Role="Stock" Type="Self.Stock" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Stok" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bazaEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Checkman" EntityType="Self.Checkman" />
+          <EntitySet Name="Flower" EntityType="Self.Flower" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" />
+          <AssociationSet Name="FK_Order_ToTable_1" Association="Self.FK_Order_ToTable_1">
+            <End Role="Checkman" EntitySet="Checkman" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ToTable" Association="Self.FK_Order_ToTable">
+            <End Role="Flower" EntitySet="Flower" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ToTable_2" Association="Self.FK_Order_ToTable_2">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <EntitySet Name="Table" EntityType="bazaModel.Table" />
+          <AssociationSet Name="FK_Table_ToTable" Association="bazaModel.FK_Table_ToTable">
+            <End Role="Flower" EntitySet="Flower" />
+            <End Role="Table" EntitySet="Table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToTable_1" Association="bazaModel.FK_Table_ToTable_1">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="Table" EntitySet="Table" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idFlower" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="volume" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="idStock" Type="Int32" />
+          <NavigationProperty Name="Flower" Relationship="bazaModel.FK_Table_ToTable" FromRole="Table" ToRole="Flower" />
+          <NavigationProperty Name="Stock" Relationship="bazaModel.FK_Table_ToTable_1" FromRole="Table" ToRole="Stock" />
+        </EntityType>
+        <Association Name="FK_Table_ToTable">
+          <End Type="bazaModel.Flower" Role="Flower" Multiplicity="0..1" />
+          <End Type="bazaModel.Table" Role="Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flower">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Table">
+              <PropertyRef Name="idFlower" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToTable_1">
+          <End Type="bazaModel.Stock" Role="Stock" Multiplicity="0..1" />
+          <End Type="bazaModel.Table" Role="Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Table">
+              <PropertyRef Name="idStock" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище bazaModelContainer" CdmEntityContainer="bazaEntities3">
+          <EntitySetMapping Name="Checkman">
+            <EntityTypeMapping TypeName="bazaModel.Checkman">
+              <MappingFragment StoreEntitySet="Checkman">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flower">
+            <EntityTypeMapping TypeName="bazaModel.Flower">
+              <MappingFragment StoreEntitySet="Flower">
+                <ScalarProperty Name="rekvezits" ColumnName="rekvezits" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="bazaModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Flower" ColumnName="Flower" />
+                <ScalarProperty Name="Checkman" ColumnName="Checkman" />
+                <ScalarProperty Name="Stok" ColumnName="Stok" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+                <ScalarProperty Name="oplata" ColumnName="oplata" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stock">
+            <EntityTypeMapping TypeName="bazaModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table">
+            <EntityTypeMapping TypeName="bazaModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="idStock" ColumnName="idStock" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+                <ScalarProperty Name="idFlower" ColumnName="idFlower" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,58 @@
+﻿@model lab_5_6.Models.Table
+
+@{
+    ViewBag.Title = "DeleteTable";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Удалить запись</h2>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <h4>Table</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.volume)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.volume)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flower.rekvezits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flower.rekvezits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stock.address)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+
+            @Html.ActionLink("Назад", "DetailsTable")
+        </div>
+    }
+</div>

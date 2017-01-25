@@ -1,0 +1,45 @@
+﻿@model IEnumerable<lab_5_6.Models.Stock>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Склады</h2>
+
+<table class="table">
+
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.volume)
+        </th>
+       
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink((item.address), "DeleteStock", new { id = item.Id })
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.volume)
+            </td>
+           
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Добавить склад", "CreateStock")
+</p>
+<p>
+  
+    @Html.ActionLink("Назад", "Index")
+</p>
