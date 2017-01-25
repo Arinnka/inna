@@ -59,6 +59,7 @@ namespace lab_5_6.Controllers
         public ActionResult Create()
         {
             Order order_new = new Order();
+            order_new.date= DateTime.Now.Date;
             return View(order_new);
         }
 
@@ -171,7 +172,9 @@ namespace lab_5_6.Controllers
         [Authorize(Roles = "user")]
         public ActionResult CreateTable()
         {
-            Table Table_new = new Table();
+            Table Table_new = new Table(); 
+       
+            Table_new.date = DateTime.Now.Date;
             return View(Table_new);
         }
 
@@ -200,6 +203,7 @@ namespace lab_5_6.Controllers
         public ActionResult CreateTable1()
         {
             Table Table_new1 = new Table();
+            Table_new1.date = DateTime.Now.Date;
             Table_new1.volume = "-";
             return View(Table_new1);
         }
@@ -263,6 +267,61 @@ namespace lab_5_6.Controllers
 
         [HttpPost]
         public ActionResult Edit1(int id, FormCollection collection)
+        {
+            var OrderEdit1 = (from Order in db.Order where Order.Id == id select Order).First();
+            try
+            {
+
+                UpdateModel(OrderEdit1);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View(OrderEdit1);
+            }
+        }
+
+        // GET: Home/Edit2/5
+        [Authorize(Roles = "moderator")]
+        public ActionResult Edit2(int id)
+        {
+            var OrderEdit1 = (from Order in db.Order where Order.Id == id select Order).First();
+            return View(OrderEdit1);
+        }
+
+        // POST: Home/Edit2/5
+
+
+        [HttpPost]
+        public ActionResult Edit2(int id, FormCollection collection)
+        {
+            var OrderEdit1 = (from Order in db.Order where Order.Id == id select Order).First();
+            try
+            {
+
+                UpdateModel(OrderEdit1);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View(OrderEdit1);
+            }
+        }
+        // GET: Home/Edit2/5
+        [Authorize(Roles = "admin")]
+        public ActionResult Edit3(int id)
+        {
+            var OrderEdit1 = (from Order in db.Order where Order.Id == id select Order).First();
+            return View(OrderEdit1);
+        }
+
+        // POST: Home/Edit2/5
+
+
+        [HttpPost]
+        public ActionResult Edit3(int id, FormCollection collection)
         {
             var OrderEdit1 = (from Order in db.Order where Order.Id == id select Order).First();
             try
@@ -408,5 +467,7 @@ namespace lab_5_6.Controllers
             }
         }
 
+
+      
     }
 }

@@ -20,7 +20,7 @@ namespace lab_5_6.Models
         public int Stok { get; set; }
         public Nullable<System.DateTime> date { get; set; }
         public string volume { get; set; }
-        public string oplata { get; set; }
+        public string status { get; set; }
     
         public virtual Checkman Checkman1 { get; set; }
         public virtual Flower Flower1 { get; set; }

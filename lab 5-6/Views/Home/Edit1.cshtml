@@ -21,13 +21,13 @@
         @Html.HiddenFor(model => model.Id)
 
         
-        <div class="form-group">
-            @Html.LabelFor(model => model.oplata, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oplata, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oplata, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.DropDownListFor(model => model.status, new List<SelectListItem>
+               {
+                        new SelectListItem() {Text = "Оплачено", Value="paid"},
+                        new SelectListItem() {Text = "Не оплачено. Ошибка.", Value="not paid"},
+                     
+               }
+               )
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
